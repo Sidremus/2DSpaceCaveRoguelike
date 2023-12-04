@@ -17,13 +17,18 @@ config/features=PackedStringArray("4.2", "GL Compatibility")
 [autoload]
 
 Game="*res://game.gd"
+BetterTerrain="*res://addons/better-terrain/BetterTerrain.gd"
 
 [display]
 
-window/size/viewport_width=1920
-window/size/viewport_height=1080
+window/size/viewport_width=1440
+window/size/viewport_height=810
 window/size/window_width_override=2880
 window/size/window_height_override=1620
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/better-terrain/plugin.cfg")
 
 [input]
 
