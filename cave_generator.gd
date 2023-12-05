@@ -30,7 +30,7 @@ func generate():
 	for cell in get_used_cells(0):
 		BetterTerrain.update_terrain_cell(self, 0, cell, false)
 		i += 1
-		if  fmod(i, size / 10) == 0:
+		if  fmod(i, (size as float) / 10.) == 0.:
 			t = str(snapped(((i as float) /(size as float)) * 100., 1)) + "% Autotiling: "
 			t+= str(snapped(Time.get_unix_time_from_system() - starting_time, .1)) + "s since start, now at: " + str(i)+ " | " + str(size)
 			print(t)
@@ -43,7 +43,6 @@ func clear_circle(circle_pos: Vector2, radius: float):
 	var cell_type: int = 0
 	var min_coord: Vector2i = local_to_map(to_local(circle_pos - Vector2(radius, radius)))
 	var max_coord: Vector2i = local_to_map(to_local(circle_pos + Vector2(radius, radius)))
-	var removed_cells: Array[Vector2i]
 	for x in range(min_coord.x, max_coord.x):
 		for y in range(min_coord.y, max_coord.y):
 			cell_global_pos = to_global(map_to_local(Vector2i(x,y)))

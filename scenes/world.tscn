@@ -1,24 +1,36 @@
-[gd_scene load_steps=64 format=3 uid="uid://bq4if0g63urul"]
+[gd_scene load_steps=70 format=3 uid="uid://bq4if0g63urul"]
 
 [ext_resource type="Script" path="res://hud.gd" id="1_fcysq"]
 [ext_resource type="Script" path="res://camera.gd" id="1_o5wqy"]
 [ext_resource type="Script" path="res://actor.gd" id="1_wiau4"]
 [ext_resource type="Texture2D" uid="uid://gkt8fqtvo3wp" path="res://assets/round_large2.png" id="2_jkwey"]
 [ext_resource type="Texture2D" uid="uid://bhyhkovwgsfhh" path="res://assets/cobble.png" id="3_267y3"]
+[ext_resource type="Texture2D" uid="uid://bfpoyeu662tr7" path="res://assets/cobble_normal.png" id="4_vytcd"]
 [ext_resource type="Script" path="res://cave_generator.gd" id="5_tm08t"]
 [ext_resource type="Texture2D" uid="uid://cnjtmnsxuqfkp" path="res://assets/Rock3.png" id="6_7d8u5"]
-[ext_resource type="Texture2D" uid="uid://bpcnep51s8xx3" path="res://assets/2d_lights_and_shadows_neutral_point_light (1).webp" id="6_ewnma"]
+[ext_resource type="Texture2D" uid="uid://duyj7c6104rt" path="res://assets/ships/ShipRed01.png" id="6_y8umy"]
+[ext_resource type="Texture2D" uid="uid://cq4sudmo0y35k" path="res://assets/VFX/light_cone.png" id="7_a26m1"]
+[ext_resource type="Texture2D" uid="uid://bpcnep51s8xx3" path="res://assets/VFX/2d_lights_and_shadows_neutral_point_light (1).webp" id="8_k1mw1"]
+[ext_resource type="Texture2D" uid="uid://cbbg1tqbx42r5" path="res://assets/download (1).png" id="11_nfxh3"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_fl0hy"]
 light_mode = 2
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_4tyxa"]
+diffuse_texture = ExtResource("3_267y3")
+normal_texture = ExtResource("4_vytcd")
+specular_texture = ExtResource("3_267y3")
+specular_color = Color(0.505882, 0.843137, 0.87451, 1)
+specular_shininess = 0.33
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_07xhx"]
 friction = 0.0
 bounce = 1.0
 absorbent = true
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_m2xod"]
-radius = 56.05
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ivcxm"]
+cull_mode = 1
+polygon = PackedVector2Array(-4.34729, -52.174, 0.000671387, -65.2174, 5.79761, -52.174, 11.5943, -10.1448, 50.7245, 18.8411, 60.8692, 31.8846, 17.3909, 36.2319, 11.5936, 60.8696, -8.69629, 60.8694, -17.3917, 34.7823, -60.8699, 30.4342, -56.522, 20.2892, -14.4927, -11.5944)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ts854"]
 size = Vector2(80, 130)
@@ -167,8 +179,15 @@ polygon = PackedVector2Array(-4, -8, 4, -8, 4, -4, 8, -4, 8, 8, -4, 8, -4, 4, -8
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_y4uvq"]
 polygon = PackedVector2Array(-4, -8, 8, -8, 8, 4, 4, 4, 4, 8, -4, 8, -4, 4, -8, 4, -8, -4, -4, -4, -4, -8)
 
+[sub_resource type="CanvasTexture" id="CanvasTexture_ewage"]
+diffuse_texture = ExtResource("6_7d8u5")
+normal_texture = ExtResource("11_nfxh3")
+specular_texture = ExtResource("6_7d8u5")
+specular_color = Color(0.262745, 0.694118, 0.870588, 1)
+specular_shininess = 0.19
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t1n0x"]
-texture = ExtResource("6_7d8u5")
+texture = SubResource("CanvasTexture_ewage")
 0:0/0 = 0
 0:0/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_bpd6b")
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
@@ -763,6 +782,17 @@ domain_warp_fractal_octaves = 2
 
 [node name="World" type="Node2D"]
 
+[node name="EditorLight" type="DirectionalLight2D" parent="."]
+visible = false
+editor_only = true
+blend_mode = 2
+height = 1.0
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+color = Color(0, 0, 0, 1)
+blend_mode = 2
+height = 1.0
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HUD" type="Control" parent="CanvasLayer"]
@@ -774,6 +804,11 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_fcysq")
 
+[node name="TopLeftText" type="Label" parent="CanvasLayer/HUD"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
 [node name="Mouse_Cursor" type="Sprite2D" parent="CanvasLayer/HUD"]
 texture = ExtResource("2_jkwey")
 
@@ -783,9 +818,159 @@ texture_filter = 1
 texture_repeat = 2
 material = SubResource("CanvasItemMaterial_fl0hy")
 scale = Vector2(4, 4)
-texture = ExtResource("3_267y3")
+texture = SubResource("CanvasTexture_4tyxa")
 region_enabled = true
-region_rect = Rect2(0, 0, 10000, 10000)
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG2" type="Sprite2D" parent="BG"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(500, 0)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG3" type="Sprite2D" parent="BG"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(0, 500)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG4" type="Sprite2D" parent="BG"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(500, 500)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG5" type="Sprite2D" parent="BG"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(1000, 0)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG2" type="Sprite2D" parent="BG/BG5"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(500, 0)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG3" type="Sprite2D" parent="BG/BG5"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(0, 500)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG4" type="Sprite2D" parent="BG/BG5"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(500, 500)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG6" type="Sprite2D" parent="BG"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(1000, 1000)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG2" type="Sprite2D" parent="BG/BG6"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(500, 0)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG3" type="Sprite2D" parent="BG/BG6"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(0, 500)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG4" type="Sprite2D" parent="BG/BG6"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(500, 500)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG7" type="Sprite2D" parent="BG"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(0, 1000)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG2" type="Sprite2D" parent="BG/BG7"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(500, 0)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG3" type="Sprite2D" parent="BG/BG7"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(0, 500)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG4" type="Sprite2D" parent="BG/BG7"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(500, 500)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
 region_filter_clip_enabled = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -803,7 +988,7 @@ visible = false
 color = Color(0.443137, 0.443137, 0.443137, 1)
 
 [node name="Player" type="RigidBody2D" parent="." groups=["PLAYER"]]
-position = Vector2(874, 828)
+position = Vector2(697, 1135)
 rotation = -1.5708
 physics_material_override = SubResource("PhysicsMaterial_07xhx")
 can_sleep = false
@@ -814,23 +999,42 @@ contact_monitor = true
 linear_damp = 0.1
 script = ExtResource("1_wiau4")
 
+[node name="ShipRed01" type="Sprite2D" parent="Player"]
+texture_filter = 1
+position = Vector2(-11, -1)
+scale = Vector2(2, 2)
+texture = ExtResource("6_y8umy")
+
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Player"]
-position = Vector2(11, 3.98199e-05)
 rotation = 1.5708
-polygon = PackedVector2Array(-10, -25, -3, -33, 3, -33, 10, -25, 25, 10, 25, 25, 5, 40, -5, 40, -25, 25, -25, 10)
+polygon = PackedVector2Array(-3, -47, 3, -47, 11, -8, 50, 23, 50, 30, 15, 33, 14, 53, -14, 53, -15, 33, -50, 30, -50, 23, -11, -8)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Player/CollisionPolygon2D"]
+position = Vector2(0, 5)
+scale = Vector2(0.69, 0.69)
+occluder = SubResource("OccluderPolygon2D_ivcxm")
 
 [node name="PointLight2D" type="PointLight2D" parent="Player"]
-texture_filter = 2
-texture_repeat = 1
-scale = Vector2(5.6, 5.6)
-energy = 1.72
-blend_mode = 2
+rotation = 1.52716
+scale = Vector2(0.64, 1.395)
+color = Color(0.894118, 0.733333, 0.533333, 1)
+energy = 7.8
 shadow_enabled = true
-shadow_color = Color(0.0196078, 0.027451, 0.027451, 1)
 shadow_filter = 2
-texture = ExtResource("6_ewnma")
-texture_scale = 2.25
-height = 65.0
+shadow_filter_smooth = 4.0
+texture = ExtResource("7_a26m1")
+texture_scale = 4.36
+height = 52.0
+
+[node name="PointLight2D2" type="PointLight2D" parent="Player"]
+color = Color(0.682353, 0.74902, 0.807843, 1)
+energy = 0.5
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 3.0
+texture = ExtResource("8_k1mw1")
+texture_scale = 10.0
+height = 80.0
 
 [node name="Actor4" type="RigidBody2D" parent="."]
 position = Vector2(2550, 364)
@@ -865,13 +1069,6 @@ rot_speed = 150.0
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Actor5"]
 rotation = 1.5708
 polygon = PackedVector2Array(0, -45, 25, 25, 0, 15, -25, 25)
-
-[node name="Rigidbody" type="RigidBody2D" parent="."]
-position = Vector2(669, 506)
-mass = 3.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Rigidbody"]
-shape = SubResource("CircleShape2D_m2xod")
 
 [node name="Rigidbody2" type="RigidBody2D" parent="."]
 position = Vector2(766, 283)
