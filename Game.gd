@@ -11,7 +11,7 @@ var is_control_actor_relative: bool = true
 var camera_mouse_follow: bool = true
 
 # Cave Generator
-var skip_cave_generation: bool = true
+var skip_cave_generation: bool = false
 var cave_size:= Vector2i(256, 256)
 var noise_threshold: float = .05
 var cave_noise: FastNoiseLite

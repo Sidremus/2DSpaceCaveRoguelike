@@ -33,8 +33,8 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 			linear_velocity = linear_velocity.move_toward(new_target_vel, acceleration * acc_fac * Game.last_phys_delta * Game.input_vec.length())
 			target_vel = linear_velocity
 		else:
-			linear_velocity = linear_velocity
-
+			linear_velocity = target_vel
+	
 	if is_drilling:
 		var contacts: int = get_contact_count()
 		if contacts > 0:
@@ -42,5 +42,5 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 				if state.get_contact_collider_object(contact) is CAVEGENERATOR:
 					state.get_contact_collider_object(contact).clear_cell_at_position(state.get_contact_local_position(contact))
 
-func _on_body_entered(body: Node) -> void:
-	set_deferred("target_vel", linear_velocity)
+func _on_body_entered(_body: Node) -> void:
+	set_deferred("target_vel", linear_velocity if !is_drilling else linear_velocity *.95)

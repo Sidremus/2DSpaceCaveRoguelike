@@ -7,7 +7,7 @@
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_cnwyh"]
 friction = 0.0
-bounce = 0.9
+bounce = 0.5
 
 [sub_resource type="Curve" id="Curve_di7wt"]
 max_value = 1.25
@@ -25,7 +25,7 @@ light_mode = 1
 blend_mode = 1
 
 [node name="Flare" type="RigidBody2D"]
-mass = 0.1
+mass = 0.05
 physics_material_override = SubResource("PhysicsMaterial_cnwyh")
 lock_rotation = true
 continuous_cd = 1

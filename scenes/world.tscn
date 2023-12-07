@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://bq4if0g63urul"]
+[gd_scene load_steps=75 format=3 uid="uid://bq4if0g63urul"]
 
 [ext_resource type="Script" path="res://hud.gd" id="1_fcysq"]
 [ext_resource type="Script" path="res://camera.gd" id="1_o5wqy"]
@@ -11,7 +11,24 @@
 [ext_resource type="Texture2D" uid="uid://duyj7c6104rt" path="res://assets/ships/ShipRed01.png" id="6_y8umy"]
 [ext_resource type="Texture2D" uid="uid://cq4sudmo0y35k" path="res://assets/VFX/light_cone.png" id="7_a26m1"]
 [ext_resource type="Texture2D" uid="uid://bpcnep51s8xx3" path="res://assets/VFX/2d_lights_and_shadows_neutral_point_light (1).webp" id="8_k1mw1"]
+[ext_resource type="Script" path="res://trail.gd" id="10_hdwx7"]
 [ext_resource type="Texture2D" uid="uid://cbbg1tqbx42r5" path="res://assets/download (1).png" id="11_nfxh3"]
+
+[sub_resource type="Environment" id="Environment_0s3lw"]
+background_mode = 3
+glow_enabled = true
+glow_levels/1 = 4.11
+glow_levels/2 = 3.88
+glow_levels/4 = 0.86
+glow_levels/5 = 0.0
+glow_normalized = true
+glow_intensity = 1.87
+glow_strength = 1.56
+glow_mix = 0.267
+glow_bloom = 0.04
+glow_blend_mode = 1
+adjustment_contrast = 1.05
+adjustment_saturation = 0.94
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_fl0hy"]
 light_mode = 2
@@ -27,9 +44,18 @@ specular_shininess = 0.33
 friction = 0.0
 bounce = 0.1
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_u1m50"]
+
+[sub_resource type="Curve" id="Curve_dbf52"]
+_data = [Vector2(0, 0.440951), 0.0, 0.0, 0, 0, Vector2(0.0575601, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_sq3o1"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ivcxm"]
 cull_mode = 1
-polygon = PackedVector2Array(-4.34729, -52.174, 0.000671387, -65.2174, 5.79761, -52.174, 11.5943, -10.1448, 50.7245, 18.8411, 60.8692, 31.8846, 17.3909, 36.2319, 11.5936, 60.8696, -8.69629, 60.8694, -17.3917, 34.7823, -60.8699, 30.4342, -56.522, 20.2892, -14.4927, -11.5944)
+polygon = PackedVector2Array(-1.44916, -62.3188, 1.4494, -62.3188, 11.5943, -13.0435, 33.3334, 1.44922, 63.7682, 27.5363, 59.4203, 30.4348, 23.1885, 31.884, 13.0436, 37.6812, 11.5936, 60.8696, -8.69629, 60.8694, -13.0434, 36.2318, -24.6376, 30.4348, -55.0724, 30.4348, -60.8694, 26.0869, -34.7825, 4.34778, -8.69556, -14.4928)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ts854"]
 size = Vector2(80, 130)
@@ -781,6 +807,9 @@ domain_warp_fractal_octaves = 2
 
 [node name="World" type="Node2D"]
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_0s3lw")
+
 [node name="EditorLight" type="DirectionalLight2D" parent="."]
 editor_only = true
 blend_mode = 2
@@ -788,7 +817,6 @@ height = 1.0
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 color = Color(0, 0, 0, 1)
-energy = 0.93
 blend_mode = 2
 height = 1.0
 
@@ -813,6 +841,7 @@ texture = ExtResource("2_jkwey")
 
 [node name="BG" type="Sprite2D" parent="."]
 modulate = Color(0.278431, 0.278431, 0.278431, 1)
+z_index = -100
 texture_filter = 1
 texture_repeat = 2
 material = SubResource("CanvasItemMaterial_fl0hy")
@@ -1476,20 +1505,50 @@ max_contacts_reported = 4
 contact_monitor = true
 script = ExtResource("1_wiau4")
 
+[node name="Trail" type="Line2D" parent="Player"]
+modulate = Color(1, 1, 1, 0.388235)
+self_modulate = Color(1, 1, 1, 0.290196)
+z_index = -10
+material = SubResource("CanvasItemMaterial_u1m50")
+position = Vector2(-28, -46.5)
+rotation = 1.57079
+points = PackedVector2Array(0, 0, 0, 150)
+width = 2.0
+width_curve = SubResource("Curve_dbf52")
+gradient = SubResource("Gradient_sq3o1")
+antialiased = true
+script = ExtResource("10_hdwx7")
+
+[node name="Trail2" type="Line2D" parent="Player"]
+modulate = Color(1, 1, 1, 0.388235)
+self_modulate = Color(1, 1, 1, 0.290196)
+z_index = -10
+material = SubResource("CanvasItemMaterial_u1m50")
+position = Vector2(-27, 48.5)
+rotation = 1.57079
+points = PackedVector2Array(0, 0, 0, 150)
+width = 2.0
+width_curve = SubResource("Curve_dbf52")
+gradient = SubResource("Gradient_sq3o1")
+antialiased = true
+script = ExtResource("10_hdwx7")
+
 [node name="ShipRed01" type="Sprite2D" parent="Player"]
 texture_filter = 1
 position = Vector2(-11, -1)
 scale = Vector2(2, 2)
 texture = ExtResource("6_y8umy")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Player"]
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Player"]
+position = Vector2(-5, -6.10352e-05)
 rotation = 1.5708
-polygon = PackedVector2Array(-3, -47, 3, -47, 11, -8, 50, 23, 50, 30, 15, 33, 14, 53, -14, 53, -15, 33, -50, 30, -50, 23, -11, -8)
-
-[node name="LightOccluder2D" type="LightOccluder2D" parent="Player/CollisionPolygon2D"]
-position = Vector2(0, 5)
 scale = Vector2(0.69, 0.69)
 occluder = SubResource("OccluderPolygon2D_ivcxm")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Player"]
+visible = false
+rotation = 1.5708
+polygon = PackedVector2Array(-3, -47, 3, -47, 11, -8, 50, 23, 50, 30, 15, 33, 14, 53, -14, 53, -15, 33, -50, 30, -50, 23, -11, -8)
 
 [node name="PointLight2D" type="PointLight2D" parent="Player"]
 rotation = 1.52716
