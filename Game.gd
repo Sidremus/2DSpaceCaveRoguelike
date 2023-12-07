@@ -10,6 +10,12 @@ var mouse_sensitivity: float = .01
 var is_control_actor_relative: bool = true
 var camera_mouse_follow: bool = true
 
+# Cave Generator
+var skip_cave_generation: bool = true
+var cave_size:= Vector2i(256, 256)
+var noise_threshold: float = .05
+var cave_noise: FastNoiseLite
+
 # Difficulty
 var difficulty: float = 1.
 
@@ -20,16 +26,12 @@ var mouse_pos:= Vector2.ZERO
 var mouse_global_pos:= Vector2.ZERO
 var input_vec:= Vector2.ZERO
 var zoom: float = 1.
+var last_phys_delta: float
 
 # Items
 var item_container: Node
 var flare_scene = preload("res://scenes/flare.tscn")
-var flare_inst
-
-# Cave Generator
-var cave_size:= Vector2i(128, 128)
-var noise_threshold: float = .05
-var cave_noise: FastNoiseLite
+var flare_inst: ITEM
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
@@ -39,7 +41,7 @@ func _ready() -> void:
 	player = get_tree().get_first_node_in_group("PLAYER")
 	player.is_player_controlled = true
 	cave_generator = get_tree().get_first_node_in_group("CAVEGENERATOR")
-	cave_generator.generate()
+	if !skip_cave_generation: cave_generator.generate()
 	cave_generator.clear_circle(player.global_position, 400)
 	cave_noise = cave_generator.noise
 
@@ -68,7 +70,7 @@ func _input(event: InputEvent) -> void:
 			flare_inst = flare_scene.instantiate() as ITEM
 			flare_inst.global_rotation = player.global_rotation
 			flare_inst.global_position = player.global_position
-			flare_inst.linear_velocity = Vector2.RIGHT.rotated(player.global_rotation) * 550 #+ player.linear_velocity
+			flare_inst.linear_velocity = Vector2.RIGHT.rotated(player.global_rotation + player.get_angle_to(mouse_global_pos)) * 550 + player.linear_velocity
 			flare_inst.add_collision_exception_with(player)
 			item_container.add_child(flare_inst)
 			flare_inst.activate()
@@ -78,4 +80,8 @@ func _input(event: InputEvent) -> void:
 func _process(_delta: float) -> void:
 	input_vec.y = Input.get_axis("a", "d")
 	input_vec.x = Input.get_axis("s", "w")
-	if input_vec.length() > 1.: input_vec = input_vec.normalized()
+	#if input_vec.length() > 1.: input_vec = input_vec.normalized()
+	input_vec = input_vec.limit_length(1.25)
+
+func _physics_process(delta: float) -> void:
+	last_phys_delta = delta

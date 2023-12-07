@@ -21,10 +21,11 @@ BetterTerrain="*res://addons/better-terrain/BetterTerrain.gd"
 
 [display]
 
-window/size/viewport_width=1440
-window/size/viewport_height=810
-window/size/window_width_override=2880
-window/size/window_height_override=1620
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/borderless=true
+window/size/window_width_override=2560
+window/size/window_height_override=1440
 
 [editor_plugins]
 
@@ -94,7 +95,6 @@ flare={
 
 [rendering]
 
-renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 2d/shadow_atlas/size=4096
 environment/defaults/default_clear_color=Color(0, 0, 0, 1)

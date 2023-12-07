@@ -20,13 +20,12 @@ light_mode = 2
 diffuse_texture = ExtResource("3_267y3")
 normal_texture = ExtResource("4_vytcd")
 specular_texture = ExtResource("3_267y3")
-specular_color = Color(0.505882, 0.843137, 0.87451, 1)
+specular_color = Color(0.49395, 0.836032, 0.867815, 1)
 specular_shininess = 0.33
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_07xhx"]
 friction = 0.0
-bounce = 1.0
-absorbent = true
+bounce = 0.1
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ivcxm"]
 cull_mode = 1
@@ -783,13 +782,13 @@ domain_warp_fractal_octaves = 2
 [node name="World" type="Node2D"]
 
 [node name="EditorLight" type="DirectionalLight2D" parent="."]
-visible = false
 editor_only = true
 blend_mode = 2
 height = 1.0
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 color = Color(0, 0, 0, 1)
+energy = 0.93
 blend_mode = 2
 height = 1.0
 
@@ -813,11 +812,491 @@ offset_bottom = 23.0
 texture = ExtResource("2_jkwey")
 
 [node name="BG" type="Sprite2D" parent="."]
-modulate = Color(0.427451, 0.427451, 0.427451, 1)
+modulate = Color(0.278431, 0.278431, 0.278431, 1)
 texture_filter = 1
 texture_repeat = 2
 material = SubResource("CanvasItemMaterial_fl0hy")
 scale = Vector2(4, 4)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG8" type="Sprite2D" parent="BG"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(-2000, 0)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG2" type="Sprite2D" parent="BG/BG8"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(500, 0)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG3" type="Sprite2D" parent="BG/BG8"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(0, 500)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG4" type="Sprite2D" parent="BG/BG8"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(500, 500)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG5" type="Sprite2D" parent="BG/BG8"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(1000, 0)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG2" type="Sprite2D" parent="BG/BG8/BG5"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(500, 0)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG3" type="Sprite2D" parent="BG/BG8/BG5"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(0, 500)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG4" type="Sprite2D" parent="BG/BG8/BG5"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(500, 500)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG6" type="Sprite2D" parent="BG/BG8"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(1000, 1000)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG2" type="Sprite2D" parent="BG/BG8/BG6"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(500, 0)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG3" type="Sprite2D" parent="BG/BG8/BG6"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(0, 500)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG4" type="Sprite2D" parent="BG/BG8/BG6"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(500, 500)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG7" type="Sprite2D" parent="BG/BG8"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(0, 1000)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG2" type="Sprite2D" parent="BG/BG8/BG7"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(500, 0)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG3" type="Sprite2D" parent="BG/BG8/BG7"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(0, 500)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG4" type="Sprite2D" parent="BG/BG8/BG7"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(500, 500)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG9" type="Sprite2D" parent="BG"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(-2000, -2000)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG2" type="Sprite2D" parent="BG/BG9"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(500, 0)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG3" type="Sprite2D" parent="BG/BG9"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(0, 500)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG4" type="Sprite2D" parent="BG/BG9"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(500, 500)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG5" type="Sprite2D" parent="BG/BG9"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(1000, 0)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG2" type="Sprite2D" parent="BG/BG9/BG5"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(500, 0)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG3" type="Sprite2D" parent="BG/BG9/BG5"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(0, 500)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG4" type="Sprite2D" parent="BG/BG9/BG5"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(500, 500)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG6" type="Sprite2D" parent="BG/BG9"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(1000, 1000)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG2" type="Sprite2D" parent="BG/BG9/BG6"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(500, 0)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG3" type="Sprite2D" parent="BG/BG9/BG6"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(0, 500)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG4" type="Sprite2D" parent="BG/BG9/BG6"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(500, 500)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG7" type="Sprite2D" parent="BG/BG9"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(0, 1000)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG2" type="Sprite2D" parent="BG/BG9/BG7"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(500, 0)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG3" type="Sprite2D" parent="BG/BG9/BG7"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(0, 500)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG4" type="Sprite2D" parent="BG/BG9/BG7"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(500, 500)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG10" type="Sprite2D" parent="BG"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(0, -2000)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG2" type="Sprite2D" parent="BG/BG10"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(500, 0)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG3" type="Sprite2D" parent="BG/BG10"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(0, 500)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG4" type="Sprite2D" parent="BG/BG10"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(500, 500)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG5" type="Sprite2D" parent="BG/BG10"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(1000, 0)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG2" type="Sprite2D" parent="BG/BG10/BG5"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(500, 0)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG3" type="Sprite2D" parent="BG/BG10/BG5"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(0, 500)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG4" type="Sprite2D" parent="BG/BG10/BG5"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(500, 500)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG6" type="Sprite2D" parent="BG/BG10"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(1000, 1000)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG2" type="Sprite2D" parent="BG/BG10/BG6"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(500, 0)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG3" type="Sprite2D" parent="BG/BG10/BG6"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(0, 500)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG4" type="Sprite2D" parent="BG/BG10/BG6"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(500, 500)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG7" type="Sprite2D" parent="BG/BG10"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(0, 1000)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG2" type="Sprite2D" parent="BG/BG10/BG7"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(500, 0)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG3" type="Sprite2D" parent="BG/BG10/BG7"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(0, 500)
+texture = SubResource("CanvasTexture_4tyxa")
+region_enabled = true
+region_rect = Rect2(0, 0, 500, 500)
+region_filter_clip_enabled = true
+
+[node name="BG4" type="Sprite2D" parent="BG/BG10/BG7"]
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_fl0hy")
+position = Vector2(500, 500)
 texture = SubResource("CanvasTexture_4tyxa")
 region_enabled = true
 region_rect = Rect2(0, 0, 500, 500)
@@ -992,11 +1471,9 @@ position = Vector2(697, 1135)
 rotation = -1.5708
 physics_material_override = SubResource("PhysicsMaterial_07xhx")
 can_sleep = false
-lock_rotation = true
 continuous_cd = 2
 max_contacts_reported = 4
 contact_monitor = true
-linear_damp = 0.1
 script = ExtResource("1_wiau4")
 
 [node name="ShipRed01" type="Sprite2D" parent="Player"]
@@ -1087,3 +1564,5 @@ format = 2
 layer_0/tile_data = PackedInt32Array(1114140, 196608, 2, 1048604, 262144, 1, 1048605, 65536, 2, 1048606, 327680, 3, 1048607, 65536, 3, 1048608, 65536, 3, 1048609, 65536, 3, 1048610, 65536, 3, 1048611, 65536, 3, 1048612, 65536, 3, 1048613, 65536, 3, 1048614, 458752, 0, 1114150, 262144, 3, 1114151, 65536, 3, 1179688, 196608, 1, 1245224, 262144, 2, 1245225, 131072, 0, 1310761, 327680, 3, 1310762, 458752, 0, 1376298, 196608, 1, 1441834, 196608, 1, 1507370, 196608, 2, 1638442, 0, 0, 1703978, 0, 1, 1769514, 262144, 1, 1835050, 458752, 2, 1900586, 327680, 2, 1966122, 327680, 1, 2031657, 327680, 1, 2097193, 131072, 1, 2162729, 131072, 1, 2228264, 327680, 1, 2293800, 458752, 1, 2359336, 196608, 1, 2424872, 458752, 3, 2424871, 327680, 0, 2490407, 131072, 2, 2555942, 131072, 2, 2621477, 131072, 2, 2621476, 589824, 1, 2687012, 131072, 2, 2687011, 524288, 1, 2687010, 0, 2, 2621474, 393216, 0, 2621473, 262144, 3, 2555937, 196608, 1, 2490400, 65536, 2, 2424864, 393216, 2, 2424863, 65536, 0, 2424862, 589824, 0, 2359326, 131072, 0, 2359325, 65536, 0, 2359324, 0, 0, 2424860, 589824, 1, 2424859, 0, 0, 2490394, 262144, 0, 2555930, 458752, 2, 2555929, 0, 0, 2621465, 393216, 4, 2687001, 0, 1, 2752537, 393216, 2, 2752536, 65536, 0, 2752535, 65536, 0, 2752534, 327680, 2, 2686998, 131072, 1, 2621462, 327680, 0, 2555925, 131072, 1, 2490389, 131072, 0, 2490388, 65536, 0, 2555924, 65536, 1, 2555923, 65536, 1, 2490387, 65536, 0, 2490386, 327680, 2, 2424850, 131072, 0, 2424849, 327680, 2, 2359313, 131072, 1, 2293777, 131072, 1, 2228241, 458752, 2, 2162705, 196608, 1, 2097169, 196608, 1, 2031633, 196608, 1, 1966097, 196608, 1, 1900561, 196608, 1, 1835025, 458752, 0, 1835024, 65536, 3, 1835023, 327680, 4, 1769487, 131072, 0, 1835022, 0, 1, 1900558, 0, 2, 1966093, 196608, 0, 2031629, 196608, 2, 2097164, 196608, 3, 2162701, 196608, 0, 2228237, 262144, 4, 2228238, 65536, 3, 2293773, 196608, 1, 2359309, 196608, 2, 2424844, 196608, 0, 2490380, 196608, 1, 2555916, 196608, 2, 2621453, 196608, 3, 2686990, 196608, 0, 2752526, 196608, 1, 2818062, 196608, 1, 2883598, 196608, 2, 2949135, 0, 3, 2949136, 65536, 3, 2949137, 65536, 3, 2949138, 65536, 3, 2949139, 65536, 3, 2949140, 458752, 0, 3014676, 262144, 3, 3014677, 65536, 3, 3014678, 131072, 3, 2949143, 0, 2, 2949144, 131072, 2, 2883609, 65536, 2, 2883610, 327680, 3, 2883611, 65536, 3, 2883612, 458752, 3, 2818076, 196608, 1, 2752540, 458752, 0, 2752539, 327680, 3, 2752538, 327680, 1, 2752533, 65536, 1, 2752532, 65536, 1, 2752531, 393216, 2, 2687002, 65536, 1, 2621467, 327680, 0, 2621466, 327680, 2, 2621464, 65536, 3, 2621463, 65536, 3, 2686997, 65536, 1, 2686996, 65536, 1, 2686995, 0, 1, 2752530, 0, 0, 2818066, 0, 2, 2818067, 65536, 2, 2818068, 65536, 2, 2818069, 65536, 2, 2818070, 393216, 1, 2818071, 65536, 1, 2818072, 65536, 1, 2818073, 65536, 1, 2818074, 131072, 1, 2883607, 393216, 1, 2883606, 0, 2, 2883608, 327680, 1, 2687003, 131072, 1, 2621468, 458752, 3, 2555932, 262144, 4, 2490395, 393216, 3, 2490396, 458752, 1, 2424861, 65536, 2, 2359329, 65536, 1, 2359330, 65536, 1, 2359331, 65536, 1, 2293796, 393216, 2, 2293797, 65536, 1, 2293798, 327680, 1, 2228263, 65536, 1, 2228265, 131072, 2, 2490406, 327680, 1, 2555941, 327680, 1, 2490405, 65536, 1, 2424870, 327680, 2, 2359334, 131072, 1, 2293799, 65536, 2, 2162727, 65536, 1, 2162726, 393216, 2, 2162725, 0, 0, 2228260, 0, 0, 2293795, 65536, 0, 2359332, 65536, 1, 2228261, 393216, 2, 2097190, 0, 1, 2031654, 0, 0, 1966119, 0, 1, 1900583, 0, 0, 1835048, 262144, 2, 1835049, 65536, 0, 1900584, 393216, 2, 2031655, 393216, 2, 2424866, 65536, 1, 2490402, 65536, 2, 2490403, 65536, 2, 2424868, 65536, 1, 2424869, 65536, 1, 2162728, 65536, 1, 2031658, 131072, 2, 1966123, 131072, 2, 1900587, 131072, 0, 1835052, 196608, 3, 2490404, 393216, 1, 2555940, 0, 1, 2621475, 65536, 0, 2359333, 65536, 1, 2228262, 65536, 1, 2097191, 65536, 1, 2031656, 65536, 1, 1966120, 65536, 1, 1900585, 65536, 1, 1966121, 65536, 1, 2097192, 65536, 1, 2752547, 196608, 2, 1769515, 131072, 2, 1703979, 131072, 1, 1638444, 458752, 3, 1572908, 196608, 1, 1507373, 458752, 3, 1441837, 196608, 0, 1507372, 262144, 0, 1638443, 327680, 0, 1769512, 196608, 1, 1703976, 196608, 1, 1572904, 196608, 1, 1507368, 196608, 1, 1441832, 196608, 1, 1376296, 196608, 1, 1310760, 262144, 1, 1114152, 458752, 4, 1048616, 196608, 0, 983079, 196608, 2, 917543, 524288, 1, 852006, 65536, 0, 852005, 65536, 0, 786468, 196608, 0, 720931, 131072, 3, 720930, 327680, 0, 720929, 0, 0, 655392, 131072, 3, 655391, 65536, 3, 655390, 65536, 3, 655389, 65536, 3, 655388, 65536, 3, 655387, 327680, 0, 655386, 65536, 0, 655385, 65536, 0, 655384, 65536, 0, 655383, 0, 0, 720919, 0, 1, 720920, 327680, 1, 720921, 65536, 2, 720922, 65536, 2, 720923, 131072, 2, 786460, 0, 0, 786461, 65536, 0, 786462, 65536, 0, 786463, 65536, 0, 786464, 65536, 0, 786465, 393216, 2, 786466, 131072, 1, 852003, 65536, 0, 852004, 524288, 2, 852007, 65536, 0, 852008, 65536, 0, 852009, 131072, 0, 917546, 131072, 3, 917545, 327680, 3, 917544, 65536, 2, 917542, 65536, 2, 917541, 65536, 2, 917540, 65536, 2, 917539, 65536, 2, 917538, 65536, 2, 917537, 65536, 2, 852000, 65536, 1, 851999, 65536, 1, 851998, 65536, 1, 851997, 65536, 1, 851996, 393216, 2, 851995, 65536, 0, 851994, 393216, 0, 851993, 65536, 3, 851992, 327680, 3, 851991, 65536, 2, 851990, 65536, 2, 851989, 0, 2, 852001, 65536, 1, 852002, 327680, 2, 917536, 65536, 2, 917535, 65536, 2, 917534, 327680, 1, 917533, 65536, 1, 917532, 393216, 1, 983068, 0, 1, 983069, 65536, 1, 983070, 131072, 1, 917531, 65536, 2, 917530, 0, 2, 786456, 131072, 1, 786455, 393216, 2, 786454, 65536, 0, 786453, 393216, 0, 786452, 65536, 3, 786451, 65536, 3, 786450, 65536, 3, 786449, 65536, 3, 786448, 327680, 3, 851983, 131072, 2, 851982, 327680, 1, 917518, 131072, 2, 917517, 65536, 2, 983052, 458752, 2, 1048588, 131072, 2, 1048587, 589824, 1, 1114123, 131072, 1, 1114122, 393216, 2, 1179658, 327680, 1, 1245194, 131072, 1, 1245193, 393216, 2, 1310729, 327680, 1, 1376265, 131072, 1, 1441801, 131072, 1, 1441800, 0, 1, 1507336, 0, 1, 1572872, 262144, 1, 1638408, 196608, 1, 1572873, 131072, 2, 1507337, 131072, 1, 1310730, 131072, 2, 1179659, 131072, 2, 983051, 0, 0, 917516, 262144, 1, 851981, 393216, 2, 786445, 0, 0, 786446, 65536, 0, 786447, 589824, 1, 720911, 0, 0, 720912, 131072, 0, 851980, 0, 0, 1048586, 0, 0, 1114121, 0, 0, 1179657, 0, 1, 1245192, 0, 0, 1310728, 0, 1, 1376264, 0, 1, 1703944, 196608, 1, 1769480, 262144, 3, 1769481, 458752, 0, 1835017, 262144, 3, 1835018, 458752, 0, 1900554, 262144, 3, 1900555, 65536, 3, 1900556, 458752, 3, 1835020, 196608, 1, 1769484, 196608, 1, 1703948, 262144, 0, 1703949, 393216, 3, 1638413, 0, 1, 1572877, 262144, 2, 1507341, 196608, 1, 1441805, 196608, 1, 1376269, 196608, 0, 1572878, 131072, 0, 1638414, 131072, 1, 1703950, 458752, 1, 1769486, 262144, 2, 1900559, 458752, 1, 1966095, 196608, 1, 2031631, 196608, 1, 2097167, 196608, 1, 2162703, 196608, 1, 2228239, 524288, 3, 2228240, 393216, 0, 2293776, 0, 1, 2359312, 0, 1, 2424848, 0, 1, 2490384, 0, 2, 2490385, 393216, 1, 2555921, 0, 2, 2555922, 393216, 1, 2621458, 0, 2, 2621459, 393216, 1, 2621460, 65536, 1, 2621461, 327680, 2, 2555933, 65536, 3, 2555934, 393216, 3, 2555935, 131072, 2, 2490399, 327680, 1, 2490401, 524288, 1, 2424865, 65536, 1, 2424867, 65536, 1, 1638440, 196608, 1, 2293794, 327680, 2, 2359328, 0, 1, 2293793, 65536, 1, 2228257, 65536, 1, 2162722, 131072, 1, 2097186, 327680, 1, 2031651, 131072, 0, 1835043, 131072, 0, 1703971, 393216, 3, 1638435, 0, 0, 1703970, 0, 3, 1835042, 0, 0, 1900578, 589824, 1, 1966114, 131072, 1, 2031649, 0, 1, 2097185, 393216, 2, 2162721, 65536, 1, 2228256, 393216, 2, 2293792, 393216, 1, 2490398, 0, 1, 2293791, 0, 2, 2228255, 0, 0, 2162720, 0, 1, 2097184, 0, 0, 1966113, 393216, 4, 1703972, 131072, 2, 1638436, 327680, 0, 1572901, 196608, 0, 1638437, 458752, 3, 2097187, 131072, 2, 2228258, 131072, 1, 2031650, 327680, 2, 1900577, 0, 0, 1966112, 0, 3, 1900579, 131072, 2, 1703967, 196608, 3, 1900572, 196608, 3, 1835032, 196608, 3, 1638422, 196608, 3)
 script = ExtResource("5_tm08t")
 noise = SubResource("FastNoiseLite_1yi4p")
+
+[connection signal="body_entered" from="Player" to="Player" method="_on_body_entered"]
