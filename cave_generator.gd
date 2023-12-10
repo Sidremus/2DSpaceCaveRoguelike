@@ -21,7 +21,7 @@ func generate():
 			set_cell(0, Vector2i(x,y), 0, Vector2i(cell_type,cell_type))
 			#BetterTerrain.update_terrain_cell(self, 0, Vector2i(x,y), true)
 			#print(str(i) + " | " + str(Game.cave_size.x * Game.cave_size.y))
-	var t: String = "Finished base map generation, it took " + str(snapped(Time.get_unix_time_from_system() - starting_time, .1)) + " seconds"
+	var t: String = "Map generation time: " + str(snapped(Time.get_unix_time_from_system() - starting_time, .1)) + " seconds"
 	print_debug(t)
 	
 	var i: int = 0
@@ -34,7 +34,7 @@ func generate():
 			t = str(snapped(((i as float) /(size as float)) * 100., 1)) + "% Autotiling: "
 			t+= str(snapped(Time.get_unix_time_from_system() - starting_time, .1)) + "s since start, now at: " + str(i)+ " | " + str(size)
 			print(t)
-	print_debug("Done autotiling \nIt took " + str(snapped(Time.get_unix_time_from_system() - starting_time, .1)) + " seconds")
+	print_debug("\n\nDone autotiling \nIt took " + str(snapped(Time.get_unix_time_from_system() - starting_time, .1)) + " seconds")
 	#BetterTerrain.update_terrain_cells(self, 0, get_used_cells(0))
 	#set_cells_terrain_connect(0, get_used_cells(0), 0, true)
 
@@ -57,8 +57,7 @@ func clear_circle(circle_pos: Vector2, radius: float):
 	for x in range(min_coord.x, max_coord.x):
 		for y in range(min_coord.y, max_coord.y):
 			BetterTerrain.update_terrain_cell(self, 0, Vector2i(x,y), true)
-	visible = false
-	set_deferred("visible", true)
+	redraw()
 
 func fill_circle(circle_pos: Vector2, radius: float):
 	var cell_global_pos:= Vector2.ZERO
@@ -74,8 +73,7 @@ func fill_circle(circle_pos: Vector2, radius: float):
 	for x in range(min_coord.x, max_coord.x):
 		for y in range(min_coord.y, max_coord.y):
 			BetterTerrain.update_terrain_cell(self, 0, Vector2i(x,y), true)
-	visible = false
-	set_deferred("visible", true)
+	redraw()
 
 func clear_cell_at_position(pos: Vector2):
 	var coord: Vector2i = local_to_map(to_local(pos))
@@ -83,5 +81,9 @@ func clear_cell_at_position(pos: Vector2):
 	if !edge_case:
 		set_cell(0, coord, 0, Vector2i(-1,-1))
 		BetterTerrain.update_terrain_cell(self, 0, coord, true)
+	redraw()
+
+func redraw():
 	visible = false
+	#set_deferred("visible", false)
 	set_deferred("visible", true)

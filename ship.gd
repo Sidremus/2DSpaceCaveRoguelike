@@ -1,9 +1,9 @@
 extends RigidBody2D
-class_name ACTOR
+class_name SHIP
 
 # -- Movement --
 @export var speed: float = 450.
-@export var acceleration: float = 150.
+@export var acceleration: float = 250.
 @export var rot_speed: float = 8.5
 @export var rot_acceleration: float = 3.5
 var target_rot: float
@@ -12,7 +12,7 @@ var target_vel: Vector2
 var is_drilling: bool = false
 
 # -- AI --
-var target: ACTOR
+var target: SHIP
 var is_player_controlled: bool = false
 var move_target_pos:= Vector2.ZERO
 var look_target_pos:= Vector2.ZERO
@@ -33,6 +33,8 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 			linear_velocity = linear_velocity.move_toward(new_target_vel, acceleration * acc_fac * Game.last_phys_delta * Game.input_vec.length())
 			target_vel = linear_velocity
 		else:
+			if target_vel.length() < speed/2.:
+				target_vel = target_vel.move_toward(Vector2.ZERO, Game.last_phys_delta * 15.)
 			linear_velocity = target_vel
 	
 	if is_drilling:
@@ -41,6 +43,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 			for contact in contacts:
 				if state.get_contact_collider_object(contact) is CAVEGENERATOR:
 					state.get_contact_collider_object(contact).clear_cell_at_position(state.get_contact_local_position(contact))
+	
 
 func _on_body_entered(_body: Node) -> void:
-	set_deferred("target_vel", linear_velocity if !is_drilling else linear_velocity *.95)
+	set_deferred("target_vel", linear_velocity if !is_drilling else linear_velocity *.1)

@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://b0c5d0tcr1l2l"]
+
+[ext_resource type="Script" path="res://projectile.gd" id="1_e4mgi"]
+[ext_resource type="Texture2D" uid="uid://b02gre2mwmumh" path="res://assets/VFX/blaster_projectile_colored.png" id="2_0g6cl"]
+[ext_resource type="Texture2D" uid="uid://b7jp0xx7ndmvj" path="res://assets/VFX/flare.png" id="2_5qbjl"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_cnwyh"]
+friction = 0.0
+bounce = 0.25
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_b6y1i"]
+a = Vector2(0, -37.035)
+b = Vector2(0, 13.305)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_qm3m2"]
+blend_mode = 1
+light_mode = 1
+
+[node name="BlasterShot" type="RigidBody2D"]
+collision_layer = 0
+mass = 0.01
+physics_material_override = SubResource("PhysicsMaterial_cnwyh")
+lock_rotation = true
+continuous_cd = 1
+max_contacts_reported = 1
+contact_monitor = true
+script = ExtResource("1_e4mgi")
+speed = 2598.0
+lifetime_max = 3.0
+type = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = -1.5708
+shape = SubResource("SegmentShape2D_b6y1i")
+
+[node name="BlasterProjectileColored" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_qm3m2")
+position = Vector2(-8, 1)
+rotation = 1.5708
+texture = ExtResource("2_0g6cl")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+texture_filter = 1
+texture_repeat = 1
+position = Vector2(-28, -6.36646e-12)
+rotation = -1.5708
+scale = Vector2(5.6, 5.6)
+color = Color(0.888615, 0.570138, 0.279744, 1)
+energy = 3.36
+shadow_enabled = true
+shadow_color = Color(0.0196078, 0.027451, 0.027451, 0)
+texture = ExtResource("2_5qbjl")
+texture_scale = 0.35
+height = 32.0

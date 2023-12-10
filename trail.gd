@@ -1,5 +1,5 @@
 extends Line2D
-var target: ACTOR
+var target: SHIP
 var ref_pos: Vector2
 var offset: Vector2
 var trail_length: int = 63

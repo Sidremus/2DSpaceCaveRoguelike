@@ -1,8 +1,8 @@
-[gd_scene load_steps=75 format=3 uid="uid://bq4if0g63urul"]
+[gd_scene load_steps=79 format=3 uid="uid://bq4if0g63urul"]
 
 [ext_resource type="Script" path="res://hud.gd" id="1_fcysq"]
 [ext_resource type="Script" path="res://camera.gd" id="1_o5wqy"]
-[ext_resource type="Script" path="res://actor.gd" id="1_wiau4"]
+[ext_resource type="Script" path="res://ship.gd" id="1_wiau4"]
 [ext_resource type="Texture2D" uid="uid://gkt8fqtvo3wp" path="res://assets/round_large2.png" id="2_jkwey"]
 [ext_resource type="Texture2D" uid="uid://bhyhkovwgsfhh" path="res://assets/cobble.png" id="3_267y3"]
 [ext_resource type="Texture2D" uid="uid://bfpoyeu662tr7" path="res://assets/cobble_normal.png" id="4_vytcd"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://bpcnep51s8xx3" path="res://assets/VFX/2d_lights_and_shadows_neutral_point_light (1).webp" id="8_k1mw1"]
 [ext_resource type="Script" path="res://trail.gd" id="10_hdwx7"]
 [ext_resource type="Texture2D" uid="uid://cbbg1tqbx42r5" path="res://assets/download (1).png" id="11_nfxh3"]
+[ext_resource type="Texture2D" uid="uid://boqtho4idfopa" path="res://assets/VFX/spritesheets/tile011.png" id="14_5kyan"]
 
 [sub_resource type="Environment" id="Environment_0s3lw"]
 background_mode = 3
@@ -40,9 +41,42 @@ specular_texture = ExtResource("3_267y3")
 specular_color = Color(0.49395, 0.836032, 0.867815, 1)
 specular_shininess = 0.33
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_6j8r5"]
+blend_mode = 1
+light_mode = 1
+particles_animation = true
+particles_anim_h_frames = 8
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_0fqpd"]
+max_value = 3.05
+_data = [Vector2(0, 3.05), 0.0, 0.0, 0, 0, Vector2(0.291992, 0.571636), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_s2pku"]
+curve = SubResource("Curve_0fqpd")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_w7yoj"]
+lifetime_randomness = 0.25
+particle_flag_disable_z = true
+angle_min = -720.0
+angle_max = 976.0
+direction = Vector3(0, 0, 0)
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_max = 1.3
+color = Color(1, 0.929412, 0.819608, 1)
+emission_curve = SubResource("CurveTexture_s2pku")
+hue_variation_min = -0.02
+hue_variation_max = 0.03
+anim_speed_min = 0.85
+anim_speed_max = 1.0
+
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_07xhx"]
 friction = 0.0
 bounce = 0.1
+absorbent = true
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_u1m50"]
 
@@ -55,10 +89,7 @@ colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ivcxm"]
 cull_mode = 1
-polygon = PackedVector2Array(-1.44916, -62.3188, 1.4494, -62.3188, 11.5943, -13.0435, 33.3334, 1.44922, 63.7682, 27.5363, 59.4203, 30.4348, 23.1885, 31.884, 13.0436, 37.6812, 11.5936, 60.8696, -8.69629, 60.8694, -13.0434, 36.2318, -24.6376, 30.4348, -55.0724, 30.4348, -60.8694, 26.0869, -34.7825, 4.34778, -8.69556, -14.4928)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ts854"]
-size = Vector2(80, 130)
+polygon = PackedVector2Array(-2.89844, -62.3188, 1.4494, -62.3188, 8.69574, -14.4928, 33.3334, 1.44922, 65.2175, 28.9855, 60.8697, 31.884, 15.9421, 31.884, 13.0436, 37.6812, 13.0436, 56.5217, 11.5943, 60.8695, 8.69574, 60.8695, 5.79718, 55.0724, -5.797, 55.0724, -8.69556, 62.3188, -11.5941, 62.3188, -13.0434, 57.9709, -13.0434, 37.6812, -15.942, 31.884, -57.9709, 31.884, -62.3187, 28.9855, -34.7825, 4.34778, -8.69556, -14.4928)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_leceo"]
 light_mode = 2
@@ -817,6 +848,7 @@ height = 1.0
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 color = Color(0, 0, 0, 1)
+energy = 0.95
 blend_mode = 2
 height = 1.0
 
@@ -1495,6 +1527,17 @@ script = ExtResource("1_o5wqy")
 visible = false
 color = Color(0.443137, 0.443137, 0.443137, 1)
 
+[node name="BlasterImpactPS" type="GPUParticles2D" parent="Camera2D" groups=["BLASTER_SHOT_IMPACT_PS"]]
+z_index = 10
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_6j8r5")
+emitting = false
+amount = 128
+process_material = SubResource("ParticleProcessMaterial_w7yoj")
+texture = ExtResource("14_5kyan")
+lifetime = 0.25
+visibility_rect = Rect2(-20000, -2500, 40000, 5000)
+
 [node name="Player" type="RigidBody2D" parent="." groups=["PLAYER"]]
 position = Vector2(697, 1135)
 rotation = -1.5708
@@ -1503,6 +1546,7 @@ can_sleep = false
 continuous_cd = 2
 max_contacts_reported = 4
 contact_monitor = true
+angular_damp = 3.0
 script = ExtResource("1_wiau4")
 
 [node name="Trail" type="Line2D" parent="Player"]
@@ -1536,7 +1580,6 @@ script = ExtResource("10_hdwx7")
 [node name="ShipRed01" type="Sprite2D" parent="Player"]
 texture_filter = 1
 position = Vector2(-11, -1)
-scale = Vector2(2, 2)
 texture = ExtResource("6_y8umy")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Player"]
@@ -1563,6 +1606,7 @@ texture_scale = 4.36
 height = 52.0
 
 [node name="PointLight2D2" type="PointLight2D" parent="Player"]
+position = Vector2(-0.999996, -1)
 color = Color(0.682353, 0.74902, 0.807843, 1)
 energy = 0.5
 shadow_enabled = true
@@ -1571,47 +1615,6 @@ shadow_filter_smooth = 3.0
 texture = ExtResource("8_k1mw1")
 texture_scale = 10.0
 height = 80.0
-
-[node name="Actor4" type="RigidBody2D" parent="."]
-position = Vector2(2550, 364)
-rotation = -1.5708
-physics_material_override = SubResource("PhysicsMaterial_07xhx")
-can_sleep = false
-max_contacts_reported = 8
-contact_monitor = true
-linear_damp = 0.05
-angular_damp = 2.0
-script = ExtResource("1_wiau4")
-acceleration = 300.0
-rot_speed = 150.0
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Actor4"]
-rotation = 1.5708
-polygon = PackedVector2Array(0, -45, 25, 25, 0, 15, -25, 25)
-
-[node name="Actor5" type="RigidBody2D" parent="."]
-position = Vector2(1182, 1794)
-rotation = -1.5708
-physics_material_override = SubResource("PhysicsMaterial_07xhx")
-can_sleep = false
-max_contacts_reported = 8
-contact_monitor = true
-linear_damp = 0.05
-angular_damp = 2.0
-script = ExtResource("1_wiau4")
-acceleration = 300.0
-rot_speed = 150.0
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Actor5"]
-rotation = 1.5708
-polygon = PackedVector2Array(0, -45, 25, 25, 0, 15, -25, 25)
-
-[node name="Rigidbody2" type="RigidBody2D" parent="."]
-position = Vector2(766, 283)
-mass = 5.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Rigidbody2"]
-shape = SubResource("RectangleShape2D_ts854")
 
 [node name="CaveGenerator" type="TileMap" parent="." groups=["CAVEGENERATOR"]]
 texture_filter = 1
